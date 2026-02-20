@@ -1,0 +1,88 @@
+.signupContainer {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--light-purple);
+}
+
+.signupBox {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 34px 28px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(109, 40, 217, 0.25);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 22px;
+  color: var(--primary-purple);
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2);
+}
+
+.signupBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-purple);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.signupBtn:hover {
+  background-color: var(--primary-purple-dark);
+  transform: translateY(-1px);
+}
+
+.footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.footer span {
+  color: var(--primary-purple);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.footer span:hover {
+  text-decoration: underline;
+}
+
+.checkboxGroup {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap; /* prevents text from breaking to next line */
+}
+
