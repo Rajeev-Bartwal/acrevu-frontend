@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./register.module.css";
-import api from "../services/api";
-import showToast from "../services/toastService";
-
+import api from "../../services/api";
+import showToast from "../../services/toastService";
 
 function Register() {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -27,13 +27,17 @@ function Register() {
     });
   };
 
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSignup = async () => {
     try {
       await api.post("/auth/register", formData);
-      showToast.success("Otp Sent to youre Email..")
+      showToast.success("Otp Sent to youre Email..");
       navigate("/verify-otp", { state: { email: formData.email } });
     } catch (err) {
-      showToast.error(err.response?.data || "Registration failed")
+      showToast.error(err.response?.data || "Registration failed");
     }
   };
 
@@ -54,13 +58,20 @@ function Register() {
           className={styles.input}
           onChange={handleChange}
         />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className={styles.input}
-          onChange={handleChange}
-        />
+        <div className={styles.passwordWrapper}>
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            className={styles.input}
+            value={formData.password}
+            onChange={handleChange}
+          />
+
+          <span className={styles.eyeIcon} onClick={togglePassword}>
+            <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+          </span>
+        </div>
         <input
           type="tel"
           name="mobileNumber"
@@ -89,11 +100,9 @@ function Register() {
         </button>
 
         <div className={styles.footer}>
-                  Already have an Account?{" "}
-                  <span onClick={() => navigate("/login")}>
-                    Login
-                  </span>
-                </div>
+          Already have an Account?{" "}
+          <span onClick={() => navigate("/login")}>Login</span>
+        </div>
       </div>
     </div>
   );

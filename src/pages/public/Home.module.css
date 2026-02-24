@@ -1,0 +1,77 @@
+.homeContainer {
+  font-family: Arial, sans-serif;
+}
+
+.hero {
+  background: linear-gradient(to right, #0f4c81, #2c7be5);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.searchBox {
+  margin-top: 20px;
+}
+
+.searchBox input {
+  padding: 10px;
+  width: 260px;
+  border-radius: 4px;
+  border: none;
+  margin-right: 10px;
+}
+
+.searchBox button {
+  padding: 10px 20px;
+  background: #ff6b00;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Featured Section */
+.featuredSection {
+  padding: 40px 60px;
+}
+
+.featuredSection h2 {
+  margin-bottom: 20px;
+}
+
+/* Grid like 99acres */
+.featuredGrid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+
+/* Overlay content */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.1)
+  );
+  color: white;
+}
+
+.builder {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.location {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.price {
+  margin-top: 5px;
+  color: #ffd700;
+}

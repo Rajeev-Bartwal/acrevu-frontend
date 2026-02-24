@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./register.module.css"; // same theme
-import api from "../services/api";
-import showToast from "../services/toastService";
+import api from "../../services/api";
+import showToast from "../../services/toastService";
 
 function VerifyOtp() {
   const location = useLocation();

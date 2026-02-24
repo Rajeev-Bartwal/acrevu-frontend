@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
-import api from "../services/api";
-import showToast from "../services/toastService";
+import showToast from "../../services/toastService";
+import { loginUser } from "../../services/authService";
 
 function Login() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
-    username: "",
+    identifier: "",
     password: "",
   });
 
@@ -21,8 +22,12 @@ function Login() {
     });
   };
 
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleLogin = async () => {
-    if (!formData.username || !formData.password) {
+    if (!formData.identifier || !formData.password) {
       showToast.error("Email and password are required");
       return;
     }
@@ -44,22 +49,28 @@ function Login() {
         <h2 className={styles.title}>Login</h2>
 
         <input
-          type="username"
-          name="username"
-          placeholder="Email"
+          type="text"
+          name="identifier"
+          placeholder="Email / Mobile-Number"
           className={styles.input}
-          value={formData.email}
+          value={formData.identifier}
           onChange={handleChange}
         />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className={styles.input}
-          value={formData.password}
-          onChange={handleChange}
-        />
+        <div className={styles.passwordWrapper}>
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            className={styles.input}
+            value={formData.password}
+            onChange={handleChange}
+          />
+
+          <span className={styles.eyeIcon} onClick={togglePassword}>
+            <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+          </span>
+        </div>
 
         <button
           className={styles.loginBtn}

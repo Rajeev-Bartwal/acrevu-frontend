@@ -8,9 +8,19 @@ function Header() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (isLoggedIn()) {
+    const updateUser = () => {
       setUser(getUser());
-    }
+    };
+
+    updateUser();
+
+    window.addEventListener("login", updateUser);
+    window.addEventListener("logout", updateUser);
+
+    return () => {
+      window.removeEventListener("login", updateUser);
+      window.removeEventListener("logout", updateUser);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -46,10 +56,7 @@ function Header() {
             </span>
           </div>
         ) : (
-          <span
-            className={styles.login}
-            onClick={() => navigate("/login")}
-          >
+          <span className={styles.login} onClick={() => navigate("/login")}>
             Login / Register
           </span>
         )}

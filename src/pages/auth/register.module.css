@@ -86,3 +86,29 @@
   white-space: nowrap; /* prevents text from breaking to next line */
 }
 
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordWrapper input {
+  width: 100%;
+  padding-right: 40px; /* space for eye icon */
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.eyeIcon:hover {
+  color: #333;
+}
+

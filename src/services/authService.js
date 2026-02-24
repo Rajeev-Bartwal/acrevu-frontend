@@ -12,18 +12,20 @@ export const login = (data) => {
   return api.post("/auth/login" , data);
 };
 
-// Login + store session
 export const loginUser = async (data) => {
   const response = await api.post("/auth/login", data);
 
   const { token, user } = response.data;
 
-  // Save in localStorage
   localStorage.setItem("token", token);
   localStorage.setItem("user", JSON.stringify(user));
 
+  // Notify app about login
+  window.dispatchEvent(new Event("login"));
+
   return response.data;
 };
+
 
 // Get token
 export const getToken = () => {
@@ -45,4 +47,7 @@ export const isLoggedIn = () => {
 export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+
+    // Notify app about login
+  window.dispatchEvent(new Event("logout"));
 };
