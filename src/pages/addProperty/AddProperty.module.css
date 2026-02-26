@@ -1,0 +1,73 @@
+/* Page Wrapper */
+.wrapper {
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #f5f3ff 0%,
+    #f9fafb 100%
+  );
+  padding: 50px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Main Form Card */
+.formContainer {
+  width: 100%;
+  max-width: 760px;
+  background: #ffffff;
+  padding: 36px 40px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(109, 40, 217, 0.12);
+  position: relative;
+}
+
+/* Header Section */
+.stepHeader {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Main Title */
+.stepHeader h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #6d28d9;
+  margin-bottom: 6px;
+}
+
+/* Subtitle */
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Step Indicator Badge */
+.stepIndicator {
+  margin-top: 10px;
+  display: inline-block;
+  background: #ede9fe;
+  color: #6d28d9;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Section Title inside steps */
+.sectionTitle {
+  margin: 22px 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Optional divider between sections */
+.divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 20px 0;
+}

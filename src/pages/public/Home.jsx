@@ -1,44 +1,37 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropertyCard from "../../components/property/PropertyCard";
 import styles from "./Home.module.css";
+import { getAllProperties } from "../../services/propertyService";
 
 function Home() {
-  const featuredProjects = [
-    {
-      id: 1,
-      name: "Godrej Woods",
-      location: "Sector 43, Noida",
-      price: "₹1.2 Cr - ₹2.5 Cr",
-      dealer: "Godrej Properties",
-      area: "1250",
-      bhk: "3",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-    },
-    {
-      id: 2,
-      name: "DLF The Camellias",
-      location: "Gurgaon Sector 42",
-      price: "₹8 Cr onwards",
-      dealer: "DLF Ltd",
-      area: "3500",
-      bhk: "4",
-      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
-    },
-    {
-      id: 3,
-      name: "Prestige City",
-      location: "Indirapuram, Ghaziabad",
-      price: "₹75 Lac - ₹1.5 Cr",
-      dealer: "Prestige Group",
-      area: "1100",
-      bhk: "2",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
-    },
-  ];
+  const [featuredProjects, setFeaturedProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchFeaturedProperties();
+  }, []);
+
+  const fetchFeaturedProperties = async () => {
+    try {
+      setLoading(true);
+      const res = await getAllProperties();
+      console.log("Home Properties:", res.data);
+
+      // Show only first 3 properties as featured
+      const properties = res.data || [];
+      setFeaturedProjects(properties.slice(0, 3));
+    } catch (error) {
+      console.error("Error fetching home properties", error);
+      setFeaturedProjects([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.homeContainer}>
-      {/* Hero */}
+      {/* Hero Section */}
       <div className={styles.hero}>
         <h1>Find Your Dream Property</h1>
         <p>Buy, Rent & Sell properties across India</p>
@@ -48,29 +41,48 @@ function Home() {
           <button>Search</button>
         </div>
 
-        {/* Buy Navigation */}
         <Link to="/buy" className={styles.buyBtn}>
           Browse Properties
         </Link>
       </div>
 
-      {/* Featured Projects */}
-      <div className={styles.featuredGrid}>
-        {featuredProjects.map((project) => (
-          <PropertyCard
-            key={project.id}
-            image={project.image}
-            name={project.name}
-            location={project.location}
-            price={project.price}
-            area={project.area}
-            bhk={project.bhk}
-            dealer={project.dealer}
-            isSaved={false}
-            onSave={() => console.log("Saved", project.id)}
-          />
-        ))}
-      </div>
+      {/* Featured Section */}
+      <h2 className={styles.sectionTitle}>Featured Properties</h2>
+
+      {/* Loading */}
+      {loading && <p>Fetching properties...</p>}
+
+      {/* Empty State */}
+      {!loading && featuredProjects.length === 0 && (
+        <p>No properties available.</p>
+      )}
+
+      {/* Properties Grid */}
+      {!loading && featuredProjects.length > 0 && (
+        <div className={styles.featuredGrid}>
+          {featuredProjects.map((property) => (
+            <PropertyCard
+              key={property.id}
+              image="https://images.unsplash.com/photo-1560185127-6ed189bf02f4"
+              price={
+                property.listingType === "RENT"
+                  ? `₹${property.rent}/month`
+                  : `₹${property.price}`
+              }
+              location={`${property.locality}, ${property.city}`}
+              area={property.area}
+              bhk={
+                property.bhk
+                  ? `${property.bhk} BHK`
+                  : property.category
+              }
+              dealerName={property.contactName}
+              isSaved={false}
+              onSave={() => console.log("Saved", property.id)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,105 @@
+.container {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  background: var(--light-purple);
+  padding: 40px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: #ffffff;
+  padding: 32px 36px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(109, 40, 217, 0.12);
+}
+
+/* Sections */
+.sectionTitle {
+  margin: 22px 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Inputs */
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.12);
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Radio Layout Fix */
+.radioGroup {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 18px;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.checkboxGroup {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 20px;
+  width: 100%;
+}
+
+.checkboxItem {
+  display: inline-flex;      /* important */
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  width: max-content;        /* prevents stretching */
+}
+
+/* Buttons */
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.primaryBtn {
+  padding: 12px 22px;
+  background: var(--primary-purple);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.secondaryBtn {
+  padding: 12px 22px;
+  background: #e5e7eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

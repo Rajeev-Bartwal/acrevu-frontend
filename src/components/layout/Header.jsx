@@ -29,6 +29,10 @@ function Header() {
     navigate("/login");
   };
 
+  const handleOnPostPropertyClick = () => {
+     navigate("/add-property")
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.logo} onClick={() => navigate("/")}>
@@ -43,7 +47,7 @@ function Header() {
       </nav>
 
       <div className={styles.actions}>
-        <button className={styles.postBtn}>Post Property</button>
+        <button className={styles.postBtn} onClick={handleOnPostPropertyClick}>Post Property</button>
 
         {user ? (
           <div className={styles.profileSection}>
