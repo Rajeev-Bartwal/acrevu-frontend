@@ -17,8 +17,8 @@
 
 /* Sections */
 .sectionTitle {
-  margin: 22px 0 10px;
-  font-size: 15px;
+  margin: 16px 0 8px;
+  font-size: 14px;
   font-weight: 600;
   color: #374151;
 }
@@ -28,12 +28,13 @@
 .select,
 .textarea {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 14px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 13px;
   background: #fff;
+  box-sizing: border-box;
 }
 
 .input:focus,
@@ -45,61 +46,100 @@
 }
 
 .textarea {
-  min-height: 100px;
+  min-height: 90px;
   resize: vertical;
 }
 
-/* Radio Layout Fix */
+/* Radio */
 .radioGroup {
   display: flex;
-  gap: 40px;
-  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 12px;
 }
 
 .radioGroup label {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  gap: 5px;
+  font-size: 13px;
   white-space: nowrap;
+  padding: 5px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
+.radioGroup label:has(input:checked) {
+  border-color: var(--primary-purple);
+  background: #f5f3ff;
+  color: var(--primary-purple);
+  font-weight: 500;
+}
+
+.radioGroup input[type="radio"] {
+  display: none;
+}
+
+/* Checkbox */
 .checkboxGroup {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px 20px;
+  gap: 8px 16px;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .checkboxItem {
-  display: inline-flex;      /* important */
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  gap: 5px;
+  font-size: 13px;
   white-space: nowrap;
-  width: max-content;        /* prevents stretching */
+  width: max-content;
 }
 
 /* Buttons */
 .buttonGroup {
   display: flex;
   justify-content: space-between;
-  margin-top: 24px;
+  margin-top: 20px;
 }
 
 .primaryBtn {
-  padding: 12px 22px;
+  padding: 9px 20px;
   background: var(--primary-purple);
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .secondaryBtn {
-  padding: 12px 22px;
+  padding: 9px 20px;
   background: #e5e7eb;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 13px;
+}
+
+/* Area + Unit row */
+.areaRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.areaRow .input {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.areaRow .select {
+  margin-bottom: 0;
+  width: 120px;
+  flex-shrink: 0;
 }

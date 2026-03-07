@@ -1,77 +1,194 @@
 .homeContainer {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f6fa;
+  min-height: 100vh;
 }
 
 .hero {
-  background: linear-gradient(to right, #0f4c81, #2c7be5);
+  background: linear-gradient(135deg, #0f4c81 0%, #1a6cc4 50%, #2c7be5 100%);
   color: white;
   text-align: center;
-  padding: 60px 20px;
+  padding: 72px 20px 60px;
+  position: relative;
+  overflow: hidden;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  margin: 0 0 28px;
+}
+
+.heroBtns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+
 .searchBox {
-  margin-top: 20px;
+  display: inline-flex;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 24px;
 }
 
 .searchBox input {
-  padding: 10px;
-  width: 260px;
-  border-radius: 4px;
+  padding: 13px 18px;
+  width: 300px;
   border: none;
-  margin-right: 10px;
+  outline: none;
+  font-size: 0.95rem;
+  color: #333;
 }
 
 .searchBox button {
-  padding: 10px 20px;
+  padding: 13px 24px;
   background: #ff6b00;
   border: none;
   color: white;
-  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-/* Featured Section */
+.searchBox button:hover {
+  background: #e55e00;
+}
+
+/* ── Browse Button ── */
+.buyBtn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 10px 28px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.92rem;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.buyBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+}
+
+.rentBtn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 10px 28px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.92rem;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.rentBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+}
+
+/* ── Featured Section ── */
 .featuredSection {
-  padding: 40px 60px;
+  background: #ffffff;
+  margin: 36px auto;
+  padding: 28px 32px;
+  border-radius: 12px;
+  max-width: 1200px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
-.featuredSection h2 {
-  margin-bottom: 20px;
-}
-
-/* Grid like 99acres */
-.featuredGrid {
+.featuredHeader {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
 }
 
+.featuredHeader h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0;
+}
 
-/* Overlay content */
+.viewAll {
+  text-decoration: none;
+  color: #2c7be5;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.viewAll:hover {
+  color: #0f4c81;
+  text-decoration: underline;
+}
+
+/* ── Grid ── */
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ── States ── */
+.centerText {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-size: 0.95rem;
+}
+
+/* ── Overlay (property card overlay) ── */
 .overlay {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding: 15px;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.7),
-    rgba(0,0,0,0.1)
-  );
+  background: linear-gradient(to top, rgba(0,0,0,0.68), rgba(0,0,0,0.05));
   color: white;
 }
 
 .builder {
   font-size: 12px;
-  opacity: 0.9;
+  opacity: 0.88;
 }
 
 .location {
   font-size: 13px;
-  opacity: 0.9;
+  opacity: 0.88;
 }
 
 .price {
   margin-top: 5px;
   color: #ffd700;
+  font-weight: 600;
 }

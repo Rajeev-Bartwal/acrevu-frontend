@@ -28,12 +28,26 @@
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--primary-purple);
   box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2);
+}
+
+/* NEW — error state for inputs */
+.inputError {
+  border-color: #e53e3e;
+  margin-bottom: 4px;
+}
+
+/* NEW — error message text */
+.errorText {
+  color: #e53e3e;
+  font-size: 12px;
+  margin: 0 0 10px 2px;
 }
 
 .signupBtn {
@@ -52,6 +66,12 @@
 .signupBtn:hover {
   background-color: var(--primary-purple-dark);
   transform: translateY(-1px);
+}
+
+.signupBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .footer {
@@ -83,7 +103,7 @@
   gap: 8px;
   font-weight: 500;
   cursor: pointer;
-  white-space: nowrap; /* prevents text from breaking to next line */
+  white-space: nowrap;
 }
 
 .passwordWrapper {
@@ -93,7 +113,7 @@
 
 .passwordWrapper input {
   width: 100%;
-  padding-right: 40px; /* space for eye icon */
+  padding-right: 40px;
 }
 
 .eyeIcon {
@@ -112,3 +132,33 @@
   color: #333;
 }
 
+/* NEW — dealer preferences section */
+.preferencesSection {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.preferencesTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-purple);
+  margin: 0 0 12px 0;
+}
+
+.preferenceCategory {
+  margin-bottom: 10px;
+}
+
+.categoryLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 6px 0;
+}
+
+.typeCheckboxes {
+  display: flex;
+  gap: 16px;
+}

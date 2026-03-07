@@ -1,25 +1,88 @@
 import { useEffect, useState } from "react";
-import PropertyCard from "../../components/property/PropertyCard";
 import styles from "./Buy.module.css";
 import { getAllProperties } from "../../services/propertyService";
+import PropertyListGrid from "../../components/property/PropertyListGrid";
+
+// Default fallback properties
+const defaultProperties = [
+  {
+    id: 101,
+    listingType: "SELL",
+    price: "8500000",
+    rent: null,
+    locality: "Dwarka Sector 10",
+    city: "Delhi",
+    area: "1200",
+    bhk: "3",
+    category: "Flat / Apartment",
+    userType: "DEALER",
+    contactName: "Sharma Properties",
+  },
+  {
+    id: 102,
+    listingType: "SELL",
+    price: "5500000",
+    rent: null,
+    locality: "Rohini Sector 5",
+    city: "Delhi",
+    area: "900",
+    bhk: "2",
+    userType: "DEALER",
+    category: "Flat / Apartment",
+    contactName: "Gupta Realtors",
+  },
+  {
+    id: 103,
+    listingType: "RENT",
+    price: "",
+    rent: "25000",
+    locality: "Sector 43",
+    city: "Gurgaon",
+    area: "1100",
+    bhk: "2",
+    userType: "OWNER",
+    category: "Flat / Apartment",
+    contactName: "Home Deal",
+  },
+];
 
 const Buy = () => {
-  const [properties, setProperties] = useState([]);
+  const [properties, setProperties] = useState(defaultProperties);
   const [savedIds, setSavedIds] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Pagination state
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const PAGE_SIZE = 9;
+
+  // page change hone pe re-fetch
   useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [page]);
 
   const fetchProperties = async () => {
     try {
       setLoading(true);
-      const res = await getAllProperties();
-      console.log("Fetched Properties:", res.data.data);
-      setProperties(res.data.data);
+      const res = await getAllProperties(page, PAGE_SIZE);
+
+      // Agar backend paginated response deta hai (Spring Page<T>)
+      console.log(res.data.data.totalPages)
+      if (res.data?.data?.content) {
+        const data = res.data.data.content;
+        if (data.length > 0) {
+          setProperties(data);
+          setTotalPages(res.data?.data?.totalPages);
+        }
+      } else {
+        const data = res.data?.data?.content || [];
+        if (data.length > 0) {
+          setProperties(data);
+        }
+      }
     } catch (error) {
       console.error("Error fetching properties", error);
+      // fallback to defaultProperties
     } finally {
       setLoading(false);
     }
@@ -32,34 +95,32 @@ const Buy = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h2>Buy Properties</h2>
-
-      {loading && <p>Fetching properties...</p>}
-
-      {!loading && properties.length === 0 && <h4>No properties available.</h4>}
-
-      {!loading && properties.length > 0 && (
-        <div className={styles.grid}>
-          {properties.map((property) => (
-            <PropertyCard
-              key={property.id}
-              image="https://images.unsplash.com/photo-1560185127-6ed189bf02f4"
-              price={
-                property.listingType === "RENT"
-                  ? `₹${property.rent}/month`
-                  : `₹${property.price}`
-              }
-              location={`${property.locality}, ${property.city}`}
-              area={property.area}
-              bhk={property.bhk ? `${property.bhk} BHK` : property.category}
-              dealerName={property.contactName}
-              isSaved={savedIds.includes(property.id)}
-              onSave={() => handleSave(property.id)}
-            />
-          ))}
+    <div className={styles.pageContainer}>
+      <div className={styles.propertySection}>
+        <div className={styles.sectionHeader}>
+          <h2>Buy Properties</h2>
+          {!loading && properties.length > 0 && (
+            <span className={styles.resultCount}>
+              {totalPages > 0
+                ? `Page ${page + 1} of ${totalPages}`
+                : `${properties.length} Properties`}
+            </span>
+          )}
         </div>
-      )}
+
+        <PropertyListGrid
+          properties={properties}
+          loading={loading}
+          pagination={
+            totalPages > 1
+              ? { page, totalPages, onPageChange: (p) => setPage(p) }
+              : null
+          }
+          emptyMessage="No properties found."
+          savedIds={savedIds}
+          onSave={handleSave}
+        />
+      </div>
     </div>
   );
 };

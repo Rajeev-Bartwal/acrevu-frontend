@@ -6,24 +6,31 @@ import Login from "../pages/auth/Login";
 import Buy from "../pages/public/Buy";
 import AddProperty from "../pages/addProperty/AddProperty";
 import ProtectedRoute from "./ProtectedRoutes";
+import PropertySearch from "../pages/property/PropertySearch";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public Routes */}
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/verify-otp" element={<VerifyOtp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/buy" element={<Buy />} />
 
-      {/* Protected Routes */}
       <Route
         path="/add-property"
         element={
-          <ProtectedRoute>
-            <AddProperty />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <AddProperty />
+          // </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          // <ProtectedRoute>
+            <PropertySearch />
+          // </ProtectedRoute>
         }
       />
     </Routes>

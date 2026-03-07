@@ -3,17 +3,7 @@ import pageStyles from "../AddProperty.module.css";
 import showToast from "../../../services/toastService";
 import { addProperty } from "../../../services/propertyService";
 import { Navigate, useNavigate } from "react-router-dom";
-import { Columns2 } from "lucide-react";
-
-const amenitiesList = [
-  "Lift",
-  "Parking",
-  "Gym",
-  "Power Backup",
-  "Security",
-  "Swimming Pool",
-  "Park",
-];
+import { AMENITIES } from "../../../utils/AppConstents";
 
 const Step3DetailsContact = ({ data, update, prev }) => {
   const navigate = useNavigate();
@@ -111,7 +101,7 @@ const Step3DetailsContact = ({ data, update, prev }) => {
       <h3 className={pageStyles.sectionTitle}>Amenities</h3>
 
       <div className={common.checkboxGroup}>
-        {amenitiesList.map((item) => (
+        {AMENITIES.map((item) => (
           <label key={item} className={common.checkboxItem}>
             <input
               type="checkbox"

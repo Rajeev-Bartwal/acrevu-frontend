@@ -9,45 +9,51 @@ export const verifyOtp = (data) => {
 };
 
 export const login = (data) => {
-  return api.post("/auth/login" , data);
+  return api.post("/auth/login", data);
 };
 
 export const loginUser = async (data) => {
   const response = await api.post("/auth/login", data);
 
-  const { token, user } = response.data;
+  const { accessToken, refreshToken, user } = response.data;
 
-  localStorage.setItem("token", token);
+  localStorage.setItem("accessToken", accessToken);
+  localStorage.setItem("refreshToken", refreshToken);
   localStorage.setItem("user", JSON.stringify(user));
 
-  // Notify app about login
   window.dispatchEvent(new Event("login"));
 
   return response.data;
 };
 
-
-// Get token
-export const getToken = () => {
-  return localStorage.getItem("token");
+export const getAccessToken = () => {
+  return localStorage.getItem("accessToken");
 };
 
-// Get user
 export const getUser = () => {
   const user = localStorage.getItem("user");
-  return user ? JSON.parse(user) : null;
+
+  if (!user) return null;
+
+  try {
+    return JSON.parse(user);
+  } catch (e) {
+    console.error("Invalid user data in localStorage");
+    localStorage.removeItem("user");
+    return null;
+  }
 };
 
-// Check login
 export const isLoggedIn = () => {
-  return !!localStorage.getItem("token");
+  return !!localStorage.getItem("accessToken");
 };
 
 // Logout
 export const logout = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
   localStorage.removeItem("user");
 
-    // Notify app about login
+  // Notify app about login
   window.dispatchEvent(new Event("logout"));
 };

@@ -7,6 +7,7 @@ const PropertyCard = ({
   location,
   area,
   bhk,
+  accType,
   dealerName,
   isSaved,
   onSave,
@@ -39,10 +40,10 @@ const PropertyCard = ({
 
         <div className={styles.infoRow}>
           <span>{area} sq.ft</span>
-          <span>{bhk} BHK</span>
+          <span>{bhk} </span>
         </div>
 
-        <div className={styles.dealer}>Dealer: {dealerName}</div>
+        <div className={styles.dealer}>{accType} : {dealerName}</div>
       </div>
     </div>
   );

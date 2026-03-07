@@ -6,11 +6,32 @@ const Step1Basic = ({ data, update, next }) => {
     update({ [e.target.name]: e.target.value });
   };
 
+  const areaUnitSelector = (
+    <div className={common.areaRow}>
+      <input
+        name="area"
+        placeholder="Area"
+        className={common.input}
+        value={data.area}
+        onChange={handleChange}
+      />
+      <select
+        name="areaUnit"
+        className={common.select}
+        value={data.areaUnit || "sqft"}
+        onChange={handleChange}
+      >
+        <option value="sqft">Sq. Feet</option>
+        <option value="sqyard">Sq. Yard</option>
+        <option value="sqmeter">Sq. Meter</option>
+      </select>
+    </div>
+  );
+
   return (
     <div>
       {/* User Type */}
       <h3 className={pageStyles.sectionTitle}>You are</h3>
-
       <div className={common.radioGroup}>
         <label>
           <input
@@ -22,7 +43,6 @@ const Step1Basic = ({ data, update, next }) => {
           />
           Owner
         </label>
-
         <label>
           <input
             type="radio"
@@ -33,22 +53,10 @@ const Step1Basic = ({ data, update, next }) => {
           />
           Dealer / Broker
         </label>
-
-        <label>
-          <input
-            type="radio"
-            name="userType"
-            value="BUILDER"
-            checked={data.userType === "BUILDER"}
-            onChange={handleChange}
-          />
-          Builder
-        </label>
       </div>
 
-      {/* Sell / Rent */}
+      {/* Listing Type */}
       <h3 className={pageStyles.sectionTitle}>I want to</h3>
-
       <div className={common.radioGroup}>
         <label>
           <input
@@ -60,7 +68,6 @@ const Step1Basic = ({ data, update, next }) => {
           />
           Sell
         </label>
-
         <label>
           <input
             type="radio"
@@ -75,7 +82,6 @@ const Step1Basic = ({ data, update, next }) => {
 
       {/* Property Type */}
       <h3 className={pageStyles.sectionTitle}>Property Type</h3>
-
       <div className={common.radioGroup}>
         <label>
           <input
@@ -87,7 +93,6 @@ const Step1Basic = ({ data, update, next }) => {
           />
           Residential
         </label>
-
         <label>
           <input
             type="radio"
@@ -98,7 +103,16 @@ const Step1Basic = ({ data, update, next }) => {
           />
           Commercial
         </label>
-
+        <label>
+          <input
+            type="radio"
+            name="propertyType"
+            value="INDUSTRIAL"
+            checked={data.propertyType === "INDUSTRIAL"}
+            onChange={handleChange}
+          />
+          Industrial
+        </label>
         <label>
           <input
             type="radio"
@@ -111,13 +125,10 @@ const Step1Basic = ({ data, update, next }) => {
         </label>
       </div>
 
-      {/* Category based on property type */}
+      {/* RESIDENTIAL */}
       {data.propertyType === "RESIDENTIAL" && (
         <>
-          <h3 className={pageStyles.sectionTitle}>
-            Residential Category
-          </h3>
-
+          <h3 className={pageStyles.sectionTitle}>Residential Category</h3>
           <select
             name="category"
             className={common.select}
@@ -127,10 +138,12 @@ const Step1Basic = ({ data, update, next }) => {
             <option value="">Select</option>
             <option>Flat / Apartment</option>
             <option>House / Villa</option>
+            <option>Serviced Apartment</option>
+            <option>Farm House</option>
             <option>Builder Floor</option>
-            <option>Studio Apartment</option>
+            <option>1RK / Studio Apartment</option>
+            <option>Plot / Land</option>
           </select>
-
           <input
             name="bhk"
             placeholder="BHK"
@@ -138,23 +151,14 @@ const Step1Basic = ({ data, update, next }) => {
             value={data.bhk}
             onChange={handleChange}
           />
-
-          <input
-            name="area"
-            placeholder="Area (sqft)"
-            className={common.input}
-            value={data.area}
-            onChange={handleChange}
-          />
+          {areaUnitSelector}
         </>
       )}
 
+      {/* COMMERCIAL */}
       {data.propertyType === "COMMERCIAL" && (
         <>
-          <h3 className={pageStyles.sectionTitle}>
-            Commercial Category
-          </h3>
-
+          <h3 className={pageStyles.sectionTitle}>Commercial Category</h3>
           <select
             name="category"
             className={common.select}
@@ -162,30 +166,71 @@ const Step1Basic = ({ data, update, next }) => {
             onChange={handleChange}
           >
             <option value="">Select</option>
-            <option>Office Space</option>
-            <option>Shop / Showroom</option>
+            <option>Ready to Move Offices</option>
+            <option>Bare Shell Offices</option>
             <option>Warehouse</option>
+            <option>Plot / Land</option>
+            <option>Shops & Retail</option>
+            <option>Cold Storage</option>
+            <option>Pre-leased Spaces</option>
+            <option>Restaurants</option>
+            <option>SCO Plots</option>
+            <option>Food Court</option>
+            <option>Multiplex</option>
+            <option>Co-working</option>
           </select>
+          {areaUnitSelector}
+        </>
+      )}
 
-          <input
-            name="area"
-            placeholder="Area (sqft)"
-            className={common.input}
-            value={data.area}
+      {/* INDUSTRIAL */}
+      {data.propertyType === "INDUSTRIAL" && (
+        <>
+          <h3 className={pageStyles.sectionTitle}>Industrial Category</h3>
+          <select
+            name="category"
+            className={common.select}
+            value={data.category}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select</option>
+            <option>Warehouse</option>
+            <option>Factory</option>
+            <option>Hotel / Resorts</option>
+            <option>Manufacturing</option>
+            <option>Guest-Houses / Banquette-Halls</option>
+            <option>Pre-leased Spaces</option>
+            <option>Restaurants</option>
+            <option>SCO Plots</option>
+            <option>Food Court</option>
+            <option>Multiplex</option>
+            <option>Co-working</option>
+            <option>Others</option>
+          </select>
+          {areaUnitSelector}
         </>
       )}
 
       {/* LAND */}
       {data.propertyType === "LAND" && (
-        <input
-          name="area"
-          placeholder="Plot Area (sqft)"
-          className={common.input}
-          value={data.area}
-          onChange={handleChange}
-        />
+        <>
+          <h3 className={pageStyles.sectionTitle}>Land Category</h3>
+          <select
+            name="category"
+            className={common.select}
+            value={data.category}
+            onChange={handleChange}
+          >
+            <option value="">Select</option>
+            <option>Agricultural</option>
+            <option>Abadi</option>
+            <option>Commercial</option>
+            <option>School / Hospital</option>
+            <option>IT / ITES / Institutional</option>
+            <option>Factory</option>
+          </select>
+          {areaUnitSelector}
+        </>
       )}
 
       <div className={common.buttonGroup}>

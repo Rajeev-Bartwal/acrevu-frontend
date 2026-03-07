@@ -10,8 +10,9 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <AppRoutes />
-        <AppToaster />
+        <main>
+          <AppRoutes />
+        </main>
         <AppToaster />
         <Footer />
       </BrowserRouter>

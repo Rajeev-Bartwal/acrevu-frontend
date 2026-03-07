@@ -14,6 +14,7 @@ const AddProperty = () => {
     category: "",
     bhk: "",
     area: "",
+    areaUnit: "sqft",
     floor: "",
     totalFloors: "",
     availability: "",
@@ -27,6 +28,7 @@ const AddProperty = () => {
     price: "",
     rent: "",
     deposit: "",
+    availableFrom: "",
 
     bedrooms: "",
     bathrooms: "",
@@ -55,29 +57,17 @@ const AddProperty = () => {
           <div className={styles.subtitle}>
             Post your property and reach thousands of buyers & tenants
           </div>
-
           <div className={styles.stepIndicator}>Step {step} of 3</div>
         </div>
 
         {step === 1 && (
           <Step1Basic data={formData} update={updateData} next={next} />
         )}
-
         {step === 2 && (
-          <Step2LocationPrice
-            data={formData}
-            update={updateData}
-            next={next}
-            prev={prev}
-          />
+          <Step2LocationPrice data={formData} update={updateData} next={next} prev={prev} />
         )}
-
         {step === 3 && (
-          <Step3DetailsContact
-            data={formData}
-            update={updateData}
-            prev={prev}
-          />
+          <Step3DetailsContact data={formData} update={updateData} prev={prev} />
         )}
       </div>
     </div>
